@@ -4,39 +4,34 @@ const app = express();
 const PORT = 3000;
 // const layouts = require('express-ejs-layouts');
 
-const db = require('./models');
+
+//Seed Dataconst db = require('./models');
 
 app.set('view engine', 'ejs');
 // app.use(layouts);
 
+// Albums Controller
+
+const albumsCtrl = require('./controllers/albumsController.js');
+const albums = require('./models/Album.js');
+
 
 //HOME ROUTE
 app.get('/', (req, res) => {
-    res.send('Home Page')
+    res.render('index');
 });
 
-//INDEX ROUTE
-app.get('/albums', (req, res) => {
-    console.log(albums);
-    res.send(albums);
-});
+//Albums Route
 
-//SHOW ROUTE
+app.use('/albums', albumsCtrl);
 
 
-// Controller
-
-// const albumsCtrl = require('./controllers/albumsController.js');
-// const albums = require('./models/Album.js');
 
 // MIDDLEWARE
 
 // app.use(bodyParser.urlencoded({extended: false}));
 // app.use(methodOverride('_method'));
 
-app.get('/', (req, res) => {
-    res.send('Server is working')
-});
 
 
 
