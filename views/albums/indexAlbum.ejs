@@ -7,6 +7,19 @@
 </head>
 <body>
     <h1>Album Index Page</h1>
+
+
+<ul>
+
+    <% for (let i = 0; i < albums.length; i++) { %>
+    <li style="margin-bottom: 20px;">
+        <a href="/albums/<%= albums[i]._id %>">
+            <%= albums[i].name %>
+        </a>
+    </li>
+    <% } %>
+
+</ul>
     
 </body>
 </html>
