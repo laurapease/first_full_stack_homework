@@ -1,15 +1,22 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/fullstackhw', {
+const connectionString = 'mongodb://localhost:27017/fullstackhw';
+
+const configObj = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-});
+    useFindAndModify: false,
+};
+
+mongoose.connect(connectionString, configObj);
 
 mongoose.connection.on('connected', () => {
-    console.log('mongoDB connected')
+    console.log('MongoDB connected....')
 });
 
-mongoose.connection.on('error', (err) => {
-    console.log(err)
+mongoose.connection.on('error', (error) => {
+    console.log(error)
 });
+
+module.exports.Album = require('./Album');

@@ -1,9 +1,19 @@
 const mongoose = require('mongoose');
 
 const albumSchema = new mongoose.Schema({
-    name: String,
-    artist: String,
-    rating: Number,
+    name: {
+        type: String,
+        required: true
+    },
+    artist: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
     yearReleased: Number
 });
 
