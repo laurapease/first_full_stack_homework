@@ -17,17 +17,17 @@
 
     <form action="/albums/" <%= album._id %> method="PUT" method="POST">
         <div> <label for="title">Album Name:</label>
-            <input type='text' id="title" value="album.title" />
+            <input type='text' id="title" value=<% album._id.title %> >
         </div>
         </br>
         <div>
             <label for="artist">Artist:</label>
-            <input type='text' id="artist" value="album.artist" />
+            <input type='text' id="artist" value=<% album.artist %> >
         </div>
         </br>
         <div>
             <label for="rating">Rating:</label>
-            <input type='text' id="rating" value="album.rating" />
+            <input type='text' id="rating" value=<% album.rating %> >
         </div>
         </br>
         <div>

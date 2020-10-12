@@ -56,7 +56,7 @@ router.get('/:albumId', (req, res) => {
 // DELETE ROUTE
 
 router.delete('/:albumId', (req, res) => {
-   db.Album.findByIdAndDelete(req.params.albumId, (err, deletedFruit) => {
+   db.Album.findByIdAndDelete(req.params.albumId, (err, deletedAlbum) => {
        
     if(err) return console.log(err);
        res.redirect('/albums');
@@ -98,16 +98,7 @@ router.put('/:albumId', (req, res) => {
 }); 
 
 
-    // UPDATE FRUIT IN DATABASE
 
-//     albums.splice(req.params.albumIndex, 1, newAlbum);
-//     console.log(albums);
-
-//     //REDIRECT
-
-//     res.redirect(`/albums/${req.params.albumIndex}`);
-
-// });
 
 module.exports = router;
 
