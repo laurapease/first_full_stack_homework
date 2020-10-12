@@ -3,8 +3,7 @@ const router = express.Router();
 
 //Albums Model
 
-const albums = require('../models/Album');
-
+const db = require('../models');
 
 // NEW ROUTE
 
@@ -60,7 +59,6 @@ router.delete('/:albumIndex', (req, res) => {
     res.redirect('/albums');
 
 });
-
 
 router.get('/:albumIndex/edit', (req, res) => {
 const albumIndex = req.params.albumIndex;

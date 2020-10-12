@@ -18,6 +18,7 @@ const albumSchema = new mongoose.Schema({
     owned: Boolean
 });
 
+
 const Album = mongoose.model('Album', albumSchema);
 
 module.exports = Album;
