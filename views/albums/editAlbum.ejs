@@ -10,13 +10,12 @@
         <a href="/">Home</a>
         <a href="/albums">All Albums</a>
         <a href="/albums/newAlbum">Add Album</a>
-                <a href="/albums/editAlbum">Edit Album</a>
 
     </nav>
   
     <h1>Album Edit Page</h1>
 
-    <form action="/albums/" <%= albumIndex %> method="PUT" method="POST">
+    <form action="/albums/" <%= album._id %> method="PUT" method="POST">
         <div> <label for="title">Album Name:</label>
             <input type='text' id="title" value="album.title" />
         </div>

@@ -5,7 +5,26 @@ const router = express.Router();
 
 const db = require('../models');
 
+//--------------INDEX ROUTE
 
+router.get('/', (req, res) => {
+
+    db.Album.find({}, (err, allAlbums) => {
+    console.log(allAlbums);
+
+    if (err) return console.log(err);
+
+    res.render('albums/indexAlbum', {
+        albums: allAlbums,
+    });
+});
+  });
+
+    // NEW ALBUM
+
+router.get('/newAlbum', (req, res) => {
+    res.render('albums/newAlbum');
+    });
 
 //------------- CREATE ROUTE
 
@@ -19,38 +38,15 @@ router.post('/', (req, res) => {
     });
 });
 
-//--------------INDEX ROUTE
-
-router.get('/', (req, res) => {
-
-    db.Album.find({}, (err, allAlbums) => {
-    console.log(allAlbums);
-
-    if (err) {
-        console.log(err);
-    }
-
-    res.render('albums/indexAlbum', {
-        albums: allAlbums,
-    });
-});
-  });
-
-  // NEW ALBUM
-
-router.get('/new', (req, res) => {
-    res.render('albums/newAlbum');
-    });
-
 //SHOW ROUTE
 
 router.get('/:albumId', (req, res) => {
+ 
     const albumId = req.params.albumIndex;
 
     db.Album.findById(req.params.albumId, (err, foundAlbum) => {
-        if (err) {
-            console.log(err);
-        } res.render('albums/showAlbum', {
+        if (err) return console.log(err);
+         res.render('albums/showAlbum', {
             album: foundAlbum,
         });
     });
@@ -66,18 +62,8 @@ router.delete('/:albumId', (req, res) => {
        res.redirect('/albums');
 
    });
-
-
 });
 
-router.get('/:albumIndex/edit', (req, res) => {
-const albumIndex = req.params.albumIndex;
-
-    res.render("albums/editAlbum", {
-    album: albums[albumIndex],
-    albumIndex: albumIndex
-    });
-});
 
 // EDIT ALBUM
 
@@ -95,29 +81,33 @@ router.get('/:albumId/edit', (req, res) => {
 
 // UPDATE ALBUM
 
-router.put('/:albumIndex', (req, res) => {
+router.put('/:albumId', (req, res) => {
     
+    req.body.own = req.body.own === 'on';
 
-    console.log(req.body);
+    db.Album.findByIdAndUpdate(
+        req.params.albumId,
+        req.body,
+        {new: true},
+        (err, updatedAlbum) => {
+            if (err) return console.log(err);
+            res.redirect(`/albums/${updatedAlbum._id}`);
 
-    const newAlbum = {
-        title: req.body.title,
-        artist: req.body.artist,
-        rating: req.body.rating.artist,
-        year: req.body.year,
-        own: req.body.own === 'on' ? true : false
-    }
+        }
+    );
+}); 
+
 
     // UPDATE FRUIT IN DATABASE
 
-    albums.splice(req.params.albumIndex, 1, newAlbum);
-    console.log(albums);
+//     albums.splice(req.params.albumIndex, 1, newAlbum);
+//     console.log(albums);
 
-    //REDIRECT
+//     //REDIRECT
 
-    res.redirect(`/albums/${req.params.albumIndex}`);
+//     res.redirect(`/albums/${req.params.albumIndex}`);
 
-});
+// });
 
 module.exports = router;
 
