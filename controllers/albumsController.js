@@ -7,7 +7,7 @@ const db = require('../models');
 
 
 
-//CREATE ROUTE
+//------------- CREATE ROUTE
 
 router.post('/', (req, res) => {
     
@@ -19,8 +19,8 @@ router.post('/', (req, res) => {
     });
 });
 
+//--------------INDEX ROUTE
 
-//INDEX ROUTE
 router.get('/', (req, res) => {
 
     db.Album.find({}, (err, allAlbums) => {
@@ -59,9 +59,14 @@ router.get('/:albumId', (req, res) => {
 
 // DELETE ROUTE
 
-router.delete('/:albumIndex', (req, res) => {
-    albums.splice(req.params.albumIndex, 1);
-    res.redirect('/albums');
+router.delete('/:albumId', (req, res) => {
+   db.Album.findByIdAndDelete(req.params.albumId, (err, deletedFruit) => {
+       
+    if(err) return console.log(err);
+       res.redirect('/albums');
+
+   });
+
 
 });
 
@@ -74,11 +79,24 @@ const albumIndex = req.params.albumIndex;
     });
 });
 
-//UPDATE ALBUM
+// EDIT ALBUM
+
+router.get('/:albumId/edit', (req, res) => {
+  
+  db.Album.findById(req.params.albumId, (err, foundAlbum) => {
+    if (err) return console.log(err);
+    
+    res.render('albums/editAlbum', {
+      album: foundAlbum,
+    });
+  });
+});
+
+
+// UPDATE ALBUM
 
 router.put('/:albumIndex', (req, res) => {
     
-    //GET DATA FROM REQUEST BODY
 
     console.log(req.body);
 
