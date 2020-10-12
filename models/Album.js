@@ -14,7 +14,8 @@ const albumSchema = new mongoose.Schema({
         min: 1,
         max: 10
     },
-    yearReleased: Number
+    year: Number,
+    owned: Boolean
 });
 
 const Album = mongoose.model('Album', albumSchema);

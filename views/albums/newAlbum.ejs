@@ -7,5 +7,33 @@
 </head>
 <body>
     <h1>Album New Page</h1>
+
+    <form action="/albums" method="POST">
+     <div>  <label for="name">Album Name:</label>
+        <input type='text' id="name" name="name" />
+    </div>
+</br>
+    <div>
+        <label for="artist">Artist:</label>
+        <input type='text' id="artist" name="artist" />
+</div>  
+</br>
+<div>
+        <label for="rating">Rating:</label>
+        <input type='text' id="rating" name="rating" />
+</div>
+</br>
+<div>
+        <label for="year">Year Released:</label>
+                <input type='text' id="year" name="year" />
+
+</div>
+</br>
+    <div>
+        <label for="own">Do You Own This Album?</label>
+        <input type="checkbox" id="own" name="own" />
+    </div></br>
+   <input type="submit" value="Add Album" />
+</form>
 </body>
 </html>

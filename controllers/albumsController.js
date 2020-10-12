@@ -12,6 +12,12 @@ router.get('/newAlbum', (req, res) => {
     res.render('albums/newAlbum');
     });
 
+//CREATE ROUTE
+
+router.post('/', (req, res) => {
+res.send("Received");
+})
+
 
 
 //INDEX ROUTE
