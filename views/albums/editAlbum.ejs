@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Album</title>
 </head>
 <body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/albums">All Albums</a>
+        <a href="/albums/newAlbum">Add Album</a>
+    </nav>
+  
     <h1>Album Edit Page</h1>
+
+    <form action="/albums/" <%= albumIndex %> method="PUT" method="POST">
+        <div> <label for="title">Album Name:</label>
+            <input type='text' id="title" value="album.title" />
+        </div>
+        </br>
+        <div>
+            <label for="artist">Artist:</label>
+            <input type='text' id="artist" value="album.artist" />
+        </div>
+        </br>
+        <div>
+            <label for="rating">Rating:</label>
+            <input type='text' id="rating" value="album.rating" />
+        </div>
+        </br>
+        <div>
+            <label for="year">Year Released:</label>
+            <input type='text' id="year" <%= album.year ? 'checked' : '' %> />
+    
+        </div>
+        </br>
+        <div>
+            <label for="own">Do You Own This Album?</label>
+            <input type="checkbox" id="own" value="album.own" />
+        </div></br>
+        <input type="submit" value="Add Album" />
+    </form>
 </body>
 </html>

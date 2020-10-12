@@ -6,7 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Album Show Page</h1>
     
+    <nav>
+        <a href="/">Home</a>
+        <a href="/albums">All Albums</a>
+        <a href="/albums/newAlbum">Add Album</a>
+    </nav>
+
+    <h1>Album Show Page</h1>
+
+    <h3><strong>Album: </strong> <%= album.title %></h3>    
+    <h4><strong>Artist: </strong> <%= album.artist %></h4>
+            <p>Your Rating: <%= album.rating %></p>
+        <p>Year Released: <%= album.year %></p>
+
+
+
 </body>
 </html>

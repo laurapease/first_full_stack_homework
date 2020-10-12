@@ -16,10 +16,17 @@ router.get('/newAlbum', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log(req.body);
-res.send("Received");
-})
 
+if(req.body.own === 'on') {
+    req.body.own = true;
+} else {
+    req.body.own = false;
+}
 
+albums.push(req.body);
+res.redirect(`/albums/${albums.length - 1}`);
+
+});
 
 //INDEX ROUTE
 router.get('/', (req, res) => {
@@ -37,13 +44,32 @@ router.get('/:albumIndex', (req, res) => {
     if(albums[albumIndex]) {
         res.render('albums/showAlbum', {
             album: album,
+            albumIndex: albumIndex
         });
     } else {
         res.render('albums/showAlbum', {
-            album: {name:'Does not exist'},
+            album: {title:'Does not exist'},
         });
-    }
+    } });
 
+
+// DELETE ROUTE
+
+router.delete('/:albumIndex', (req, res) => {
+    albums.splice(req.params.albumIndex, 1);
+    res.redirect('/albums');
+
+});
+
+//EDIT ALBUM
+
+router.get('/:albumIndex/edit', (req, res) => {
+const albumIndex = req.params.albumIndex;
+
+    res.render("albums/editAlbum", {
+    album: albums[albumIndex],
+    albumIndex: albumIndex
+    });
 });
 
 

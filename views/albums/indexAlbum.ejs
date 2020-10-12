@@ -6,20 +6,27 @@
     <title>Document</title>
 </head>
 <body>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/albums">All Albums</a>
+        <a href="/albums/newAlbum">Add Album</a>
+    </nav>
+
     <h1>Album Index Page</h1>
 
-
-<ul>
-
-    <% for (let i = 0; i < albums.length; i++) { %>
-    <li style="margin-bottom: 20px;">
-        <a href="/albums/<%= albums[i]._id %>">
-            <%= albums[i].name %>
-        </a>
-    </li>
-    <% } %>
-
-</ul>
+    <ul>
     
+        <% for (let i = 0; i < albums.length; i++) { %>
+        <li style="margin-bottom: 20px;">
+            <a href="/albums/<%= albums[i] %>">
+                <%= albums[i].title %>
+            </a>
+        </li>
+        <% } %>
+    
+    </ul>
+
+
 </body>
 </html>

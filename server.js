@@ -3,6 +3,10 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
+
+
 // const layouts = require('express-ejs-layouts');
 
 //Set View Engine
@@ -19,6 +23,7 @@ const albums = require('./models/Album.js');
 //Bodyparser
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride('_method'));
 
 
 app.use((req, res, next) => {
