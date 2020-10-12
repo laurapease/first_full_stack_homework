@@ -47,11 +47,6 @@ app.use('/albums', albumsCtrl);
 
 
 
-// MIDDLEWARE
-
-// app.use(bodyParser.urlencoded({extended: false}));
-// app.use(methodOverride('_method'));
-
 
 
 

@@ -11,6 +11,8 @@
         <a href="/">Home</a>
         <a href="/albums">All Albums</a>
         <a href="/albums/newAlbum">Add Album</a>
+                <a href="/albums/editAlbum">Edit Album</a>
+
     </nav>
 
     <h1>Album Show Page</h1>
@@ -20,7 +22,13 @@
             <p>Your Rating: <%= album.rating %></p>
         <p>Year Released: <%= album.year %></p>
 
+<form action="/albums/<%= album._id %>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete Album" />
+</form>
 
+<form action="/albums/<%= album._id %>/edit" method="GET">
+    <input type="submit" value="Edit Album" />
+</form>
 
 </body>
 </html>

@@ -21,7 +21,7 @@ if(req.body.own === 'on') {
     req.body.own = true;
 } else {
     req.body.own = false;
-}
+};
 
 albums.push(req.body);
 res.redirect(`/albums/${albums.length - 1}`);
@@ -61,7 +61,6 @@ router.delete('/:albumIndex', (req, res) => {
 
 });
 
-//EDIT ALBUM
 
 router.get('/:albumIndex/edit', (req, res) => {
 const albumIndex = req.params.albumIndex;
@@ -72,7 +71,32 @@ const albumIndex = req.params.albumIndex;
     });
 });
 
+//UPDATE ALBUM
 
+router.put('/:albumIndex', (req, res) => {
+    
+    //GET DATA FROM REQUEST BODY
+
+    console.log(req.body);
+
+    const newAlbum = {
+        title: req.body.title,
+        artist: req.body.artist,
+        rating: req.body.rating.artist,
+        year: req.body.year,
+        own: req.body.own === 'on' ? true : false
+    }
+
+    // UPDATE FRUIT IN DATABASE
+
+    albums.splice(req.params.albumIndex, 1, newAlbum);
+    console.log(albums);
+
+    //REDIRECT
+
+    res.redirect(`/albums/${req.params.albumIndex}`);
+
+});
 
 module.exports = router;
 
