@@ -5,52 +5,57 @@ const router = express.Router();
 
 const db = require('../models');
 
-// NEW ROUTE
 
-router.get('/newAlbum', (req, res) => {
-    res.render('albums/newAlbum');
-    });
 
 //CREATE ROUTE
 
 router.post('/', (req, res) => {
-    console.log(req.body);
+    
+    req.body.own = req.body.own === 'on';
 
-if(req.body.own === 'on') {
-    req.body.own = true;
-} else {
-    req.body.own = false;
-};
-
-albums.push(req.body);
-res.redirect(`/albums/${albums.length - 1}`);
-
-});
-
-//INDEX ROUTE
-router.get('/', (req, res) => {
-    res.render('albums/indexAlbum', {
-        albums: albums,
+    db.Album.create(req.body, (err, newAlbum) => {
+        if(err) return console.log(err);
+         res.redirect(`/albums/${newAlbum._id}`)
     });
 });
 
+
+//INDEX ROUTE
+router.get('/', (req, res) => {
+
+    db.Album.find({}, (err, allAlbums) => {
+    console.log(allAlbums);
+
+    if (err) {
+        console.log(err);
+    }
+
+    res.render('albums/indexAlbum', {
+        albums: allAlbums,
+    });
+});
+  });
+
+  // NEW ALBUM
+
+router.get('/new', (req, res) => {
+    res.render('albums/newAlbum');
+    });
+
 //SHOW ROUTE
 
-router.get('/:albumIndex', (req, res) => {
-    const albumIndex = req.params.albumIndex;
-    const album = albums[albumIndex];
+router.get('/:albumId', (req, res) => {
+    const albumId = req.params.albumIndex;
 
-    if(albums[albumIndex]) {
-        res.render('albums/showAlbum', {
-            album: album,
-            albumIndex: albumIndex
+    db.Album.findById(req.params.albumId, (err, foundAlbum) => {
+        if (err) {
+            console.log(err);
+        } res.render('albums/showAlbum', {
+            album: foundAlbum,
         });
-    } else {
-        res.render('albums/showAlbum', {
-            album: {title:'Does not exist'},
-        });
-    } });
-
+    });
+  
+     });
 
 // DELETE ROUTE
 

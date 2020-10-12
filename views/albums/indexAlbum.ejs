@@ -21,7 +21,7 @@
     
         <% for (let i = 0; i < albums.length; i++) { %>
         <li style="margin-bottom: 20px;">
-            <a href="/albums/<%= albums[i] %>">
+            <a href="/albums/<%= albums[i]._id %>">
                 <%= albums[i].title %>
             </a>
         </li>
