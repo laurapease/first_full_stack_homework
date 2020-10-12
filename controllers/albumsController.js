@@ -15,6 +15,7 @@ router.get('/newAlbum', (req, res) => {
 //CREATE ROUTE
 
 router.post('/', (req, res) => {
+    console.log(req.body);
 res.send("Received");
 })
 
