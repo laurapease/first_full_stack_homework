@@ -10,7 +10,8 @@ const albums = require('../models/Album');
 
 router.get('/newAlbum', (req, res) => {
     res.render('albums/newAlbum');
-});
+    });
+
 
 
 //INDEX ROUTE
@@ -26,9 +27,15 @@ router.get('/:albumIndex', (req, res) => {
     const albumIndex = req.params.albumIndex;
     const album = albums[albumIndex];
 
-    res.render('albums/showAlbum', {
-    album: album,
-    });
+    if(albums[albumIndex]) {
+        res.render('albums/showAlbum', {
+            album: album,
+        });
+    } else {
+        res.render('albums/showAlbum', {
+            album: {name:'Does not exist'},
+        });
+    }
 
 });
 
